@@ -11,3 +11,11 @@
 
 Launch the application using DockerCompose.
 
+```
+# docker-compose -v
+Docker Compose version v2.2.3
+```
+
+```
+# docker-compose up -d
+```
