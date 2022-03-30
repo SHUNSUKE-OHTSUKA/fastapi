@@ -62,7 +62,7 @@ jobs:
 
       - name: Update manifest file
         env:
-          YAML_PATH: simple-application/manifest/app-deployment.yaml
+          YAML_PATH: sample-application/manifest/app-deployment.yaml
           CONTAINER_NAME: fastapi-app
           IMAGE_FULL_NAME: ${{ needs.build-and-push-image.outputs.tags }}
         run: |
