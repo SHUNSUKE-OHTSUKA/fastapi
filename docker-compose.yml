@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  fastapi:
+    build:
+      context: ./fastapi
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: /run/secrets/my_secret
+      PRE_START_PATH: ${PRE_START_PATH}
+    container_name: fastapi
+    depends_on:
+      - mysql
+
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    secrets:
+      - my_secret
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: /run/secrets/my_secret
+    container_name: mysql
+
+secrets:
+  my_secret:
+    file: ./secret.txt
