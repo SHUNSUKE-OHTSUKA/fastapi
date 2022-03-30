@@ -13,7 +13,7 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Copy pre start shell file.
-COPY ./pre_start.sh /root/src
+COPY ./prestart.sh /root/src
 
 # Copy database migration files.
 COPY ./db /db
